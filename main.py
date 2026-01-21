@@ -21,6 +21,6 @@ robot.end_of_arm.move_to('stretch_gripper',-50)
 
 robot.head.pose('wheels')
 
-robot.stow()
+# robot.stow()
 
 robot.stop()
