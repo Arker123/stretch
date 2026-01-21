@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
+import hello_helpers.hello_misc as hm
 
 class JointStateSubscriber(Node):
     """
@@ -12,19 +13,22 @@ class JointStateSubscriber(Node):
         super().__init__('joint_state_subscriber')
 
         # Create a subscription to the /joint_states topic
-        self.subscription = self.create_subscription(
-            JointState,                    # Message type
-            '/joint_states',               # Topic name
-            self.joint_state_callback,     # Callback function
-            10                            # Queue size
-        )
+        # self.subscription = self.create_subscription(
+        #     JointState,                    # Message type
+        #     '/joint_states',               # Topic name
+        #     self.joint_state_callback,     # Callback function
+        #     10                            # Queue size
+        # )
 
         # Prevent unused variable warning
-        self.subscription
+        # self.subscription
 
         # Log that the node has started
         self.get_logger().info('Joint State Subscriber node has started!')
         self.get_logger().info('Listening for joint states on /joint_states topic...')
+        
+        temp = hm.HelloNode.quick_create('temp')
+        temp.stow_the_robot()
 
     def joint_state_callback(self, msg):
         """
