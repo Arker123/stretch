@@ -23,7 +23,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "joint_state_subscriber = stretch_joint_reader.joint_state_subscriber:main",
+            "joint_state_subscriber = arnavkha.joint_state_subscriber:main",
         ],
     },
 )
