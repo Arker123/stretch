@@ -6,42 +6,48 @@ robot.startup()
 
 robot.stow()
 
-# robot.arm.move_to(0.5)
-# robot.lift.move_to(1.55)
-# robot.push_command()
+robot.arm.move_to(0.5)
+robot.lift.move_to(1.55)
+robot.push_command()
 
-# print("Waiting for arm and lift to reach position...")
+print("Waiting for arm and lift to reach position...")
+time.sleep(5)
+
+print("Moving end effector...")
+robot.end_of_arm.move_to('wrist_yaw',0.5)
+robot.end_of_arm.wait_until_at_setpoint()
+robot.end_of_arm.move_to('wrist_pitch', -0.5)
+robot.end_of_arm.wait_until_at_setpoint()
+robot.end_of_arm.move_to('wrist_roll', 1)
+robot.end_of_arm.wait_until_at_setpoint()
+
 # time.sleep(5)
 
-# print("Moving end effector...")
-# robot.end_of_arm.move_to('wrist_yaw',0.5)
-# robot.end_of_arm.wait_until_at_setpoint()
-# robot.end_of_arm.move_to('wrist_pitch', -0.5)
-# robot.end_of_arm.wait_until_at_setpoint()
-# robot.end_of_arm.move_to('wrist_roll', 1)
-# robot.end_of_arm.wait_until_at_setpoint()
-
-# # time.sleep(5)
-
-# print("Operating gripper...")
-# robot.end_of_arm.move_to('stretch_gripper',100)
-# robot.end_of_arm.wait_until_at_setpoint()
-# robot.end_of_arm.move_to('stretch_gripper',0)
-# robot.end_of_arm.wait_until_at_setpoint()
+print("Operating gripper...")
+robot.end_of_arm.move_to('stretch_gripper',100)
+robot.end_of_arm.wait_until_at_setpoint()
+robot.end_of_arm.move_to('stretch_gripper',0)
+robot.end_of_arm.wait_until_at_setpoint()
 
 
-# print("Moving head to neutral position...")
-# robot.head.move_to('head_pan',1.0)
-# robot.head.move_to('head_tilt',1.0)
-# robot.head.wait_until_at_setpoint()
+print("Moving head to neutral position...")
+robot.head.move_to('head_pan',1.0)
+robot.head.move_to('head_tilt',1.0)
+robot.head.wait_until_at_setpoint()
 
-# robot.stow()
+robot.stow()
 
-robot.base.translate_by(0.1)
+robot.base.translate_by(0.5)
 robot.push_command()
 # robot.base.wait_until_at_setpoint()
-time.sleep(3)
+time.sleep(5)
 robot.base.rotate_by(3.14)
 robot.push_command()
 time.sleep(5)
+
+robot.base.translate_by(0.5)
+robot.push_command()
+
+time.sleep(5)
+
 robot.stop()
