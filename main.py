@@ -11,7 +11,7 @@ robot.lift.move_to(1.55)
 robot.push_command()
 
 print("Waiting for arm and lift to reach position...")
-time.sleep(5)
+time.sleep(8)
 
 print("Moving end effector...")
 robot.end_of_arm.move_to('wrist_yaw',0.5)
@@ -41,7 +41,7 @@ robot.base.translate_by(0.5)
 robot.push_command()
 # robot.base.wait_until_at_setpoint()
 time.sleep(5)
-robot.base.rotate_by(3.14)
+robot.base.rotate_by(-3.14)
 robot.push_command()
 time.sleep(5)
 
