@@ -39,6 +39,7 @@ robot.stow()
 
 robot.base.translate_by(0.1)
 robot.push_command()
+robot.base.wait_until_at_setpoint()
 robot.base.rotate_by(1.57)
 robot.push_command()
 
