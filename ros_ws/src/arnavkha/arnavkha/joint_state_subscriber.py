@@ -20,6 +20,15 @@ def main():
 
     temp.move_to_pose({'joint_head_pan': 1.0, 'joint_head_tilt': 1.0}, blocking=True)
     
+    temp.stow_the_robot()
+
+    temp.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
+    
+    temp.move_to_pose({'rotate_mobile_base': -3.14}, blocking=True)
+    
+    temp.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
+
+    temp.stop_the_robot()
     # temp.move_to_pose({'translate_mobile_base': 1.0})
     
     # temp.move_to_pose({'
