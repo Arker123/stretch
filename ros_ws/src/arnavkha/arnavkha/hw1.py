@@ -29,7 +29,4 @@ def main():
     temp.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
 
     temp.stop_the_robot()
-    # temp.move_to_pose({'translate_mobile_base': 1.0})
-    
-    # temp.move_to_pose({'
     
