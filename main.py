@@ -15,8 +15,11 @@ time.sleep(5)
 
 print("Moving end effector...")
 robot.end_of_arm.move_to('wrist_yaw',0.5)
+robot.end_of_arm.wait_until_at_setpoint()
 robot.end_of_arm.move_to('wrist_pitch', -0.5)
+robot.end_of_arm.wait_until_at_setpoint()
 robot.end_of_arm.move_to('wrist_roll', 1)
+robot.end_of_arm.wait_until_at_setpoint()
 
 time.sleep(5)
 
