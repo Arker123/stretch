@@ -1,66 +1,75 @@
+
 import rclpy
 from rclpy.node import Node
-import hello_helpers.hello_misc as hm
-
+from sensor_msgs.msg import JointState
 
 class JointStateSubscriber(Node):
+    """
+    A ROS 2 node that subscribes to joint states and prints joint information.
+    """
+
     def __init__(self):
+        # Initialize the node with a name
         super().__init__('joint_state_subscriber')
 
-        self.get_logger().info('Creating HelloNode interface...')
-        self.robot = hm.HelloNode.quick_create(self.get_name())
-
-        # Run commands once after node starts
-        self.execute_motion_sequence()
-
-    def execute_motion_sequence(self):
-        self.get_logger().info('Stowing robot...')
-        self.robot.stow_the_robot()
-
-        self.get_logger().info('Moving arm and lift...')
-        self.robot.move_to_pose(
-            {
-                'joint_arm': (0.5, 40.0),
-                'joint_lift': (1.55, 40.0)
-            },
-            blocking=True
+        # Create a subscription to the /joint_states topic
+        self.subscription = self.create_subscription(
+            JointState,                    # Message type
+            '/joint_states',               # Topic name
+            self.joint_state_callback,     # Callback function
+            10                            # Queue size
         )
 
-        self.robot.move_to_pose({'joint_wrist_yaw': (0.5, 20.0)}, blocking=True)
-        self.robot.move_to_pose({'joint_wrist_pitch': (-1.0, 20.0)}, blocking=True)
-        self.robot.move_to_pose({'joint_wrist_roll': (1.0, 20.0)}, blocking=True)
+        # Prevent unused variable warning
+        self.subscription
 
-        # Open gripper
-        self.robot.move_to_pose({'joint_gripper_finger_right': (50, 50)})
-        self.robot.move_to_pose({'joint_gripper_finger_right': (50, 50)})
+        # Log that the node has started
+        self.get_logger().info('Joint State Subscriber node has started!')
+        self.get_logger().info('Listening for joint states on /joint_states topic...')
 
-        # Close gripper
-        self.robot.move_to_pose({'joint_gripper_finger_right': (0, 50)})
-        self.robot.move_to_pose({'joint_gripper_finger_right': (0, 50)})
+    def joint_state_callback(self, msg):
+        """
+        Callback function that gets called whenever a new JointState message is received.
 
-        self.robot.move_to_pose(
-            {
-                'joint_head_pan': (0.0, 20),
-                'joint_head_tilt': (0.0, 20)
-            }
-        )
+        Args:
+            msg (JointState): The received joint state message
+        """
+        # Log basic information about the message
+        self.get_logger().info(f'Received joint states for {len(msg.name)} joints')
 
-        self.get_logger().info('Motion sequence complete.')
+        # Print detailed information about each joint
+        self.get_logger().info('Joint Information:')
+        for i, joint_name in enumerate(msg.name):
+            position = msg.position[i] if i < len(msg.position) else 'N/A'
+            velocity = msg.velocity[i] if i < len(msg.velocity) else 'N/A'
+            effort = msg.effort[i] if i < len(msg.effort) else 'N/A'
 
+            self.get_logger().info(
+                f'  {joint_name}: pos={position:.4f}, vel={velocity:.4f}, effort={effort:.4f}'
+            )
+
+        self.get_logger().info('---')
 
 def main(args=None):
+    """
+    Main function to initialize ROS 2, create the node, and spin.
+    """
+    # Initialize ROS 2 Python client library
     rclpy.init(args=args)
 
-    node = JointStateSubscriber()
+    # Create an instance of our node
+    joint_state_subscriber = JointStateSubscriber()
 
     try:
-        rclpy.spin(node)  # keeps node alive if needed
+        # Spin the node to keep it alive and processing callbacks
+        rclpy.spin(joint_state_subscriber)
     except KeyboardInterrupt:
-        pass
+        # Handle Ctrl+C gracefully
+        joint_state_subscriber.get_logger().info('Shutting down joint state subscriber...')
     finally:
-        node.destroy_node()
+        # Clean up
+        joint_state_subscriber.destroy_node()
         rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
