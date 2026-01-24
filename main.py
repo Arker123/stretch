@@ -21,7 +21,7 @@ robot.end_of_arm.wait_until_at_setpoint()
 robot.end_of_arm.move_to('wrist_roll', 1)
 robot.end_of_arm.wait_until_at_setpoint()
 
-time.sleep(5)
+# time.sleep(5)
 
 print("Operating gripper...")
 robot.end_of_arm.move_to('stretch_gripper',100)
@@ -31,7 +31,9 @@ robot.end_of_arm.wait_until_at_setpoint()
 
 
 print("Moving head to neutral position...")
-robot.head.pose('wheels')
+robot.head.move_to('head_pan',1.0)
+robot.head.move_to('head_tilt',1.0)
+robot.head.wait_until_at_setpoint()
 
 # robot.stow()
 
