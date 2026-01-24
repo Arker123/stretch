@@ -11,12 +11,12 @@ def main():
     temp.move_to_pose({'joint_wrist_roll': 1.0}, blocking=True)
 
     # open gripper
-    temp.move_to_pose({'joint_gripper_finger_right': 100}, blocking=True)
-    temp.move_to_pose({'joint_gripper_finger_right': 100}, blocking=True)
+    temp.move_to_pose({'joint_gripper_finger_right': 100.0}, blocking=True)
+    temp.move_to_pose({'joint_gripper_finger_right': 100.0}, blocking=True)
 
     # close gripper
-    temp.move_to_pose({'joint_gripper_finger_right': 0}, blocking=True)
-    temp.move_to_pose({'joint_gripper_finger_right': 0}, blocking=True)
+    temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
+    temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
 
     temp.move_to_pose({'joint_head_pan': 1.0, 'joint_head_tilt': 1.0}, blocking=True)
     
