@@ -4,7 +4,7 @@ import time
 robot = stretch_body.robot.Robot()
 robot.startup()
 
-# robot.stow()
+robot.stow()
 
 # robot.arm.move_to(0.5)
 # robot.lift.move_to(1.55)
