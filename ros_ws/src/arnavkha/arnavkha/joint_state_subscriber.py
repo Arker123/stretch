@@ -3,7 +3,7 @@ import hello_helpers.hello_misc as hm
 def main():
     temp = hm.HelloNode.quick_create('temp')
     temp.stow_the_robot()
-    temp.move_to_pose({'joint_arm': (0.5, 40.0), 'joint_lift': (1.55, 40.0)}, blocking=True)
+    temp.move_to_pose({'joint_arm': 0.5, 'joint_lift': 1.55}, blocking=True)
     # temp.move_to_pose({'joint_lift': (1.55, 40.0)}, custom_contact_thresholds=True)
 
     temp.move_to_pose({'joint_wrist_yaw': (0.5, 20.0)}, blocking=True)
