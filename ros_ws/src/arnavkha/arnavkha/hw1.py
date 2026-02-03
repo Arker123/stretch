@@ -18,7 +18,8 @@ def main():
     temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
     temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
 
-    temp.move_to_pose({'joint_head_pan': 1.0, 'joint_head_tilt': 1.0}, blocking=True)
+    temp.move_to_pose({'joint_head_pan': 1.0}, blocking=True)
+    temp.move_to_pose({'joint_head_tilt': 1.0}, blocking=True)
     
     temp.stow_the_robot()
 

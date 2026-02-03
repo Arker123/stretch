@@ -32,6 +32,8 @@ robot.end_of_arm.wait_until_at_setpoint()
 
 print("Moving head to neutral position...")
 robot.head.move_to('head_pan',1.0)
+robot.head.wait_until_at_setpoint()
+time.sleep(1)
 robot.head.move_to('head_tilt',1.0)
 robot.head.wait_until_at_setpoint()
 
