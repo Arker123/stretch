@@ -1,3 +1,4 @@
+import time
 import hello_helpers.hello_misc as hm
 
 def main():
@@ -14,14 +15,14 @@ def main():
     # temp.move_to_pose({'joint_gripper_finger_right': 100.0}, blocking=True)
     # temp.move_to_pose({'joint_gripper_finger_right': 100.0}, blocking=True)
 
-    # # close gripper
-    # temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
-    # temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
+    # close gripper
+    temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
+    temp.move_to_pose({'joint_gripper_finger_right': 0.0}, blocking=True)
 
     temp.move_to_pose({'joint_head_pan': 2.0}, blocking=True)
     temp.move_to_pose({'joint_head_tilt': 2.0}, blocking=True)
-    
-    # temp.stow_the_robot()
+    time.sleep(1)
+    temp.stow_the_robot()
 
     # temp.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
     
